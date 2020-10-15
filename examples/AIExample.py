@@ -150,13 +150,28 @@ trdf.plot(figsize=(16, 5), color=colors(), kind="area", stacked=False, alpha=0.2
 
 # In[ ]:
 
-
+# date
+# 2019-09-25    0
+# 2019-09-26    0
+# 2019-09-27    0
+# 2019-09-30    0
 long_trend = (trendy.iloc[:,-2] > 0).astype(int)
 short_trend = (1 - long_trend).astype(int)
+
+# Gap checking
+# date
+# 2019-09-25      NaT
+# 2019-09-26   1 days
+# 2019-09-27   1 days
+# 2019-09-30   3 days
+mask = long_trend.index.to_series().diff()  # <class 'pandas.core.series.Series'>
+
 
 long_trend.plot(figsize=(16, 0.85), kind="area", stacked=True, color=colors()[0], alpha=0.25)
 short_trend.plot(figsize=(16, 0.85), kind="area", stacked=True, color=colors()[1], alpha=0.25)
 
+if (DEBUGGING):
+    pdb.set_trace()
 
 # ## Entries & Exits
 
